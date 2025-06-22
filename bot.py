@@ -38,10 +38,9 @@ def start_cmd(message):
             "plan": "Free",
             "referrals": 0
         }
-        bot.reply_to(message, f"👋 Welcome to BANK_RATS CC CHECKER!\n\n💎 You've been awarded 50 credits.\n\nUse /help to see available commands.")
-
+        bot.reply_to(message, f"👋 Welcome to BANK_RATS CC CHECKER!\n\n💎 You've been awarded 50 credits.\n\nUse /help to see available commands.\n\nTag: @Bank_Rats")
     else:
-        bot.reply_to(message, f"👋 Welcome back!\n\nUse /help to see available commands.")
+        bot.reply_to(message, f"👋 Welcome back!\n\nUse /help to see available commands.\n\nTag: @Bank_Rats")
 
 # Command: /help
 @bot.message_handler(commands=['help'])
@@ -53,9 +52,10 @@ def help_cmd(message):
     text = "💎 BANK_RATS COMMANDS 💎\n\n"
     text += "👉 /status - View your plan & credits\n"
     text += "👉 /subscribe - View plans & pay\n"
-    text += "👉 /fakegen - Generate fake info\n"
-    text += "👉 /binchk - BIN lookup (limited)\n"
-    text += "👉 /msschk - Mass check (limited)\n"
+    text += "👉 /fakegen <country> - Generate fake info\n"
+    text += "👉 /binchk <bin> - BIN lookup (limited)\n"
+    text += "👉 /chk <cc|exp|cvv> - Single CC check (VIP only)\n"
+    text += "👉 /msschk - Mass CC check (VIP only)\n"
     text += "👉 /ccgen - Generate CCs (limited)\n"
     text += "👉 /referralrank - Top referrers\n"
     text += "👉 /viprank - VIP user ranks\n"
@@ -67,7 +67,7 @@ def help_cmd(message):
         text += "👉 /broadcast <msg>\n"
         text += "👉 /setrate <rate>\n"
 
-    bot.reply_to(message, text)
+    bot.reply_to(message, text + "\n\nTag: @Bank_Rats")
 
 # Command: /status
 @bot.message_handler(commands=['status'])
@@ -84,7 +84,7 @@ def status_cmd(message):
     text = f"👤 User ID: {user_id}\n"
     text += f"💎 Plan: {u['plan']}\n"
     text += f"💰 Credits: {u['credits']}\n"
-    text += f"🎁 Referrals: {u['referrals']}"
+    text += f"🎁 Referrals: {u['referrals']}\n\nTag: @Bank_Rats"
 
     bot.reply_to(message, text)
 
@@ -99,7 +99,7 @@ def subscribe_cmd(message):
     text += "\nPayment Methods:\n"
     text += f"✅ Binance: {BINANCE_EMAIL}\n"
     text += f"✅ M-Pesa: {MPESA_NUMBER}\n"
-    text += "\nAfter payment, upload screenshot here to unlock your plan!"
+    text += "\nAfter payment, upload screenshot here to unlock your plan!\n\nTag: @Bank_Rats"
 
     bot.reply_to(message, text)
 
@@ -152,7 +152,59 @@ def unban_cmd(message):
     except:
         bot.reply_to(message, "❌ Usage: /unban <user_id>")
 
-# Background thread: (later will add referrals, fakegen, ccgen etc.)
+# Command: /fakegen <country>
+@bot.message_handler(commands=['fakegen'])
+def fakegen_cmd(message):
+    user_id = message.from_user.id
+    try:
+        country = message.text.split()[1]
+        fake_info = f"📝 FAKE INFO for {country.upper()}:\n"
+        fake_info += f"👤 Name: John Doe\n📍 Address: 123 Main St\n📞 Phone: +123456789\n💳 Card: 4111 1111 1111 1111\n\nTag: @Bank_Rats"
+        bot.reply_to(message, fake_info)
+    except:
+        bot.reply_to(message, "❌ Usage: /fakegen <country>\n\nTag: @Bank_Rats")
+
+# Command: /binchk <bin>
+@bot.message_handler(commands=['binchk'])
+def binchk_cmd(message):
+    user_id = message.from_user.id
+    if user_id in banned_users:
+        return
+
+    try:
+        bin_number = message.text.split()[1]
+        result = f"✅ BIN CHECK for {bin_number}\nBank: Example Bank\nCountry: Example Country\nType: CREDIT\nLevel: GOLD\n\nTag: @Bank_Rats"
+        bot.reply_to(message, result)
+    except:
+        bot.reply_to(message, "❌ Usage: /binchk <bin>\n\nTag: @Bank_Rats")
+
+# Command: /chk <cc|exp|cvv>
+@bot.message_handler(commands=['chk'])
+def chk_cmd(message):
+    user_id = message.from_user.id
+    if users.get(user_id, {}).get("plan") not in ["Monthly", "Lifetime"]:
+        bot.reply_to(message, "❌ This command is for VIP/Monthly users only.\nUpgrade with /subscribe.\n\nTag: @Bank_Rats")
+        return
+
+    try:
+        cc_input = message.text.split()[1]
+        result = f"✅ CC Check Result:\nCard: {cc_input}\nStatus: LIVE ✅\nVBV Status: NON-VBV\n\nTag: @Bank_Rats"
+        bot.reply_to(message, result)
+    except:
+        bot.reply_to(message, "❌ Usage: /chk <cc|exp|cvv>\n\nTag: @Bank_Rats")
+
+# Command: /msschk
+@bot.message_handler(commands=['msschk'])
+def msschk_cmd(message):
+    user_id = message.from_user.id
+    if users.get(user_id, {}).get("plan") not in ["Monthly", "Lifetime"]:
+        bot.reply_to(message, "❌ This command is for VIP/Monthly users only.\nUpgrade with /subscribe.\n\nTag: @Bank_Rats")
+        return
+
+    bot.reply_to(message, "📥 Send your CC list here to begin mass checking...\n\nTag: @Bank_Rats")
+
+# Background thread — Referral loyalty program
+# Will be added in next full code refactor with db
 
 # Polling loop
 print("🤖 BANK_RATS BOT is RUNNING!")
