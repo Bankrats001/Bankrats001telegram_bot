@@ -1,6 +1,4 @@
-✅ BANK_RATS_CC_CHECKER — Part 1 Release
 
-Filename: bot.py (Part 1 - Core Logic, Tier System, BIN/FakeGen/ManualPay/Confirm)
 
 from telebot import TeleBot, types from config import API_KEY, ADMIN_ID import random import time import requests
 
