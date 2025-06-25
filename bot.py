@@ -1,4 +1,8 @@
-
+from telebot import TeleBot, types
+from config import API_KEY, ADMIN_ID
+import random
+import time
+import requests
 
 from telebot import TeleBot, types from config import API_KEY, ADMIN_ID import random import time import requests
 
