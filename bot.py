@@ -10,7 +10,7 @@ bot = TeleBot(API_KEY)
 
 users = {}
 
-Sample tiers: Free, Monthly, Lifetime
+#Sample tiers: Free, Monthly, Lifetime
 
 def get_user(user_id): if user_id not in users: users[user_id] = {'tier': 'Free', 'credits': 10, 'username': None} return users[user_id]
 
