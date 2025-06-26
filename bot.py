@@ -1,9 +1,14 @@
+
 import os
 import telebot
+import sqlite3
+import requests
+import json
+from telebot import types
 
-# BOT TOKEN & ADMIN ID
-API_TOKEN = "YOUR_REAL_BOT_TOKEN"  # <-- Replace with actual token
-OWNER_ID = 123456789  # <-- Replace with your real Telegram user ID
+# ✅ BOT TOKEN & ADMIN ID (REPLACED AS PER YOUR INSTRUCTION)
+API_TOKEN = "7808962933:AAEvQ_KG0Au24RK_Btez7rMvI_n1ozwWW9A"
+OWNER_ID = 7200774078
 
 bot = telebot.TeleBot(API_TOKEN)
 
@@ -79,6 +84,6 @@ EXCHANGE_RATE_API = "https://api.exchangerate-api.com/v4/latest/USD"
 # LOGGING SETUP
 ENABLE_LOGGING = True
 
-# ✅ Final polling line — placed correctly below logging
+# ✅ REQUIRED: Keep bot polling active
+print("BANK_RATS_CC_CHECKER is now running... 💳🐀")
 bot.polling(none_stop=True)
-
