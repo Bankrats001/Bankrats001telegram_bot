@@ -1,16 +1,12 @@
-
 import os
 import telebot
-import sqlite3
-import requests
-import json
 from telebot import types
 
-# ✅ BOT TOKEN & ADMIN ID (REPLACED AS PER YOUR INSTRUCTION)
+# BOT TOKEN & ADMIN ID
 API_TOKEN = "7808962933:AAEvQ_KG0Au24RK_Btez7rMvI_n1ozwWW9A"
 OWNER_ID = 7200774078
 
-bot = telebot.TeleBot(API_TOKEN)
+bot = telebot.TeleBot(API_TOKEN, parse_mode="HTML")
 
 # PAYMENT INFO
 PAYMENT_METHODS = {
@@ -84,6 +80,6 @@ EXCHANGE_RATE_API = "https://api.exchangerate-api.com/v4/latest/USD"
 # LOGGING SETUP
 ENABLE_LOGGING = True
 
-# ✅ REQUIRED: Keep bot polling active
+# START POLLING — FIXED LOCATION FOR RELIABILITY
 print("BANK_RATS_CC_CHECKER is now running... 💳🐀")
 bot.polling(none_stop=True)
