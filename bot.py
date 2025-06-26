@@ -1,13 +1,11 @@
 import os
 import telebot
-from telebot import types
-import sqlite3
 
 # BOT TOKEN & ADMIN ID
-API_TOKEN = os.getenv("BOT_API_TOKEN", "YOUR_BOT_TOKEN")
-OWNER_ID = int(os.getenv("OWNER_ID", "123456789"))
+API_TOKEN = "YOUR_REAL_BOT_TOKEN"  # <-- Replace with actual token
+OWNER_ID = 123456789  # <-- Replace with your real Telegram user ID
 
-bot = telebot.TeleBot(API_TOKEN, parse_mode="HTML")
+bot = telebot.TeleBot(API_TOKEN)
 
 # PAYMENT INFO
 PAYMENT_METHODS = {
@@ -72,8 +70,7 @@ ALL_COMMANDS = {
     "/myreferrals": "Check your referral stats",
     "/log": "Your past checks log",
     "/me": "View your profile",
-    "/users": "Admin only - list users",
-    "/broadcast": "Admin only - send update to all users"
+    "/users": "Admin only - list users"
 }
 
 # USD-KSH Converter API (optional)
@@ -81,6 +78,7 @@ EXCHANGE_RATE_API = "https://api.exchangerate-api.com/v4/latest/USD"
 
 # LOGGING SETUP
 ENABLE_LOGGING = True
-if __name__ == "__main__":
-    print("BANK_RATS_CC_CHECKER is now running... 💳🐀")
-    bot.polling(none_stop=True)
+
+# ✅ Final polling line — placed correctly below logging
+bot.polling(none_stop=True)
+
