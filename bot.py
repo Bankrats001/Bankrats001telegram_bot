@@ -81,3 +81,6 @@ EXCHANGE_RATE_API = "https://api.exchangerate-api.com/v4/latest/USD"
 
 # LOGGING SETUP
 ENABLE_LOGGING = True
+if __name__ == "__main__":
+    print("BANK_RATS_CC_CHECKER is now running... 💳🐀")
+    bot.polling(none_stop=True)
