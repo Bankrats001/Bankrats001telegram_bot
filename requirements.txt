@@ -1,2 +1,12 @@
-pyTelegramBotAPI==4.15.4
+Flask
+Flask-SQLAlchemy
+python-telegram-bot
 requests
+cryptography
+bcrypt
+PyJWT
+redis
+celery
+python-dotenv
+aiohttp
+Flask-CORS
