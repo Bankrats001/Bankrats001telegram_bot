@@ -1,4 +1,0 @@
-# config.py
-
-API_KEY = "7808962933:AAEvQ_KG0Au24RK_Btez7rMvI_n1ozwWW9A"
-ADMIN_ID = "7200774078"
