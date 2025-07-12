@@ -12,8 +12,7 @@ from dotenv import load_dotenv
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
-    format=\'%(asctime)s - %(name)s - %(levelname)s - %(message)s\',
-    handlers=[
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
         logging.FileHandler(\'bot.log\'),
         logging.StreamHandler(sys.stdout)
     ]
