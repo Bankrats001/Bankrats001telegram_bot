@@ -13,7 +13,7 @@ from dotenv import load_dotenv
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-        logging.FileHandler(\'bot.log\'),
+        logging.FileHandler("bot.log"),
         logging.StreamHandler(sys.stdout)
     ]
 )
