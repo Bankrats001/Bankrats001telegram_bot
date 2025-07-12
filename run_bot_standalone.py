@@ -9,22 +9,30 @@ import sys
 import logging
 from dotenv import load_dotenv
 
-# Add src to path
-sys.path.insert(0, '/data/data/com.termux/files/home/Bankrats001telegram_bot/src')
-
-# Load environment variables
-load_dotenv()
-
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    format=\'%(asctime)s - %(name)s - %(levelname)s - %(message)s\',
     handlers=[
-        logging.FileHandler('bot.log'),
+        logging.FileHandler(\'bot.log\'),
         logging.StreamHandler(sys.stdout)
     ]
 )
 logger = logging.getLogger(__name__)
+
+# Ensure src is in Python path
+current_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.abspath(os.path.join(current_dir, os.pardir))
+src_path = os.path.join(project_root, \'src\')
+
+if src_path not in sys.path:
+    sys.path.insert(0, src_path)
+
+# Debugging prints
+print(f"DEBUG: current_dir: {current_dir}")
+print(f"DEBUG: project_root: {project_root}")
+print(f"DEBUG: src_path: {src_path}")
+print(f"DEBUG: sys.path after modification: {sys.path}")
 
 def create_app():
     """Create Flask app for database context"""
@@ -52,7 +60,7 @@ def main():
         app = create_app()
         
         # Get bot token
-        bot_token = os.getenv('TELEGRAM_BOT_TOKEN')
+        bot_token = os.getenv("TELEGRAM_BOT_TOKEN")
         if not bot_token:
             logger.error("TELEGRAM_BOT_TOKEN not found in environment variables")
             return
@@ -72,5 +80,5 @@ def main():
         logger.error(f"Bot error: {e}")
         raise
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
