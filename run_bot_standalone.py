@@ -17,12 +17,6 @@ src_path = os.path.join(project_root, 'src')
 if src_path not in sys.path:
     sys.path.insert(0, src_path)
 
-# Debugging prints - will show what Python sees in its path
-print(f"DEBUG: current_dir: {current_dir}")
-print(f"DEBUG: project_root: {project_root}")
-print(f"DEBUG: src_path: {src_path}")
-print(f"DEBUG: sys.path after modification: {sys.path}")
-
 # Load environment variables
 load_dotenv()
 
@@ -40,8 +34,8 @@ logger = logging.getLogger(__name__)
 def create_app():
     """Create Flask app for database context"""
     from flask import Flask
-    from config import Config
-    from models.user import db
+    from src.config import Config  # Corrected import
+    from src.models.user import db  # Corrected import
     
     app = Flask(__name__)
     Config.init_app(app)
@@ -69,7 +63,7 @@ def main():
             return
         
         # Initialize bot
-        from services.telegram_bot_advanced import BankRatsCCCheckerBot
+        from src.services.telegram_bot_advanced import BankRatsCCCheckerBot # Corrected import
         bot = BankRatsCCCheckerBot(bot_token, app)
         
         logger.info("Starting BANK_RATS CC CHECKER BOT🐀...")
