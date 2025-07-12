@@ -13,7 +13,7 @@ class Config:
     BOT_EMOJI = "🐀💳"
     BOT_USERNAME = "@Bank_Rats"
     OWNER_USERNAME = "@Bank_Rats"
-    OWNER_DISPLAY_NAME = "𝑵𝒂𝒊𝒓𝒐𝒃𝒊𝒂𝒏𝒈𝒐𝒐𝒏"
+    OWNER_DISPLAY_NAME = "𝓑𝓐𝓝𝓚_𝓡𝓐𝓣𝓢 𝓥𝓮𝓻𝓲𝓯𝓲𝓮𝓭"
     ADMIN_ID = 7200774078  # User's Telegram ID
     
     # Telegram Bot Configuration
