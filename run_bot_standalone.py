@@ -10,7 +10,7 @@ import logging
 from dotenv import load_dotenv
 
 # Add src to path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
+sys.path.insert(0, '/data/data/com.termux/files/home/Bankrats001telegram_bot/src')
 
 # Load environment variables
 load_dotenv()
